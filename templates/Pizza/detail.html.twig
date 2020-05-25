@@ -1,9 +1,17 @@
 {% extends "base.html.twig" %}
 
-{% block title %}{% endblock %}
+{% block title %}Liste des ingrédients{% endblock %}
 
-{% block titrePage %}{% endblock %}
+{% block titrePage %}Les ingrédients{% endblock %}
 
 {% block body %}
-    Le détail de la pizza sélectionnée
+    <div class="tp-detail-page">
+    {% for ingredientPizza in pizza.IngredientsPizza() %}
+        <div class="tp-detail-title">
+            <a href="{{ path("app_pizza_detail", {"pizzaId": ingredient.id}) }}">
+                <i class="fa fa-caret-square-o-right tp-link" aria-hidden="true"></i>
+                <span>{{ ingredientPizza.ingredient.name }}</span>
+            </a>
+        </div>
+    {% endfor %}
 {% endblock %}

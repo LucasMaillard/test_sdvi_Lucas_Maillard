@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Controller;
 
+use App\Entity\Ingredient;
 use App\Repository\PizzaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,8 +43,11 @@ class PizzaController extends AbstractController
      *
      * @return Response
      */
-    public function detailAction(int $pizzaId): Response
+
+    public function detailAction(int $pizzaId, PizzaRepository $pizzaRepo): Response
     {
-        return $this->render("Pizza/detail.html.twig");
+        return $this->render("Pizza/detail.html.twig", ['pizza' => $pizzaRepo->find($pizzaId)]);
     }
 }
+
+

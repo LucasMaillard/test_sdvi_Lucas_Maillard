@@ -5,16 +5,16 @@
         "php": "^7.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "doctrine/annotations": "1.8.*",
         "symfony/console": "5.0.*",
         "symfony/dotenv": "5.0.*",
         "symfony/flex": "1.6.2",
         "symfony/framework-bundle": "5.0.*",
-        "symfony/yaml": "5.0.*",
-        "doctrine/annotations": "1.8.*",
-        "symfony/orm-pack": "1.0.8",
+        "symfony/orm-pack": "^1.0",
         "symfony/security-bundle": "5.0.*",
         "symfony/templating": "5.0.*",
-        "symfony/webpack-encore-bundle": "1.7.3"
+        "symfony/webpack-encore-bundle": "1.7.3",
+        "symfony/yaml": "5.0.*"
     },
     "config": {
         "preferred-install": {
@@ -64,7 +64,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "*",
         "symfony/debug-pack": "*",
-        "symfony/maker-bundle": "*",
+        "symfony/maker-bundle": "^1.18",
         "symfony/phpunit-bridge": "*",
         "symfony/profiler-pack": "*",
         "symfony/var-dumper": "*"

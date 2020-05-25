@@ -34,6 +34,11 @@ class Pizza
     private $quantiteIngredients;
 
     /**
+     * @ORM\ManyToOne(targetEntity=IngredientPizza::class)
+     */
+    private $IngredientsPizza;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -104,5 +109,17 @@ class Pizza
     public function getQuantiteIngredients(): Collection
     {
         return $this->quantiteIngredients;
+    }
+
+    public function getIngredientsPizza(): ?IngredientPizza
+    {
+        return $this->IngredientsPizza;
+    }
+
+    public function setIngredientsPizza(?IngredientPizza $IngredientsPizza): self
+    {
+        $this->IngredientsPizza = $IngredientsPizza;
+
+        return $this;
     }
 }

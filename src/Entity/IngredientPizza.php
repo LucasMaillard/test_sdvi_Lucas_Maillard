@@ -7,7 +7,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="nombre_ingredient_par_pizza")
+ * @ORM\Table(name="ingredient_pizza")
  * @ORM\Entity(repositoryClass="App\Repository\IngredientPizzaRepository")
  */
 class IngredientPizza
