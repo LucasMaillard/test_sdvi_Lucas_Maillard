@@ -39,15 +39,7 @@ class Pizzaiolo
     private $numeroSecu;
 
     /**
-     * @var Pizzeria
-     * @ORM\ManyToOne(
-     *     targetEntity="App\Entity\Pizzeria",
-     *     inversedBy="pizzaiolos"
-     * )
-     * @ORM\JoinColumn(
-     *     name="pizzeria_id",
-     *     referencedColumnName="id_pizzeria"
-     * )
+     * @ORM\OneToMany(targetEntity=Pizzeria::class, mappedBy="pizzaiolos")
      */
     private $employeur;
 

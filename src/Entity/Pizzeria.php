@@ -41,15 +41,24 @@ class Pizzeria
      */
     private $numTelephone;
 
-    /**
-     * @var Collection
-     */
-    private $pizzas;
 
     /**
-     * @var Collection
+     * @var Pizzaiolo
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Pizzaiolo",
+     *     mappedBy="pizzeria"
+     * )
+     * @ORM\JoinColumn(
+     *     name="pizzaiolo_id",
+     *     referencedColumnName="id_pizzaiolo"
+     * )
      */
     private $pizzaiolos;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Pizza::class, mappedBy="pizzeria")
+     */
+    private $pizzas;
 
     /**
      * Constructor
@@ -137,33 +146,6 @@ class Pizzeria
     }
 
     /**
-     * @param Pizza $pizza
-     * @return Pizzeria
-     */
-    public function addPizza(Pizza $pizza): Pizzeria
-    {
-        $this->pizzas[] = $pizza;
-
-        return $this;
-    }
-
-    /**
-     * @param Pizza $pizza
-     */
-    public function removePizza(Pizza $pizza): void
-    {
-        $this->pizzas->removeElement($pizza);
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getPizzas() :Collection
-    {
-        return $this->pizzas;
-    }
-
-    /**
      * @param Pizzaiolo $pizzaiolo
      * @return Pizzeria
      */
@@ -188,5 +170,33 @@ class Pizzeria
     public function getPizzaiolos() :Collection
     {
         return $this->pizzaiolos;
+    }
+
+    /**
+     * @return Collection|Pizza[]
+     */
+    public function getPizzas(): Collection
+    {
+        return $this->pizzas;
+    }
+
+    public function addPizza(Pizza $pizza): self
+    {
+        if (!$this->pizzas->contains($pizza)) {
+            $this->pizzas[] = $pizza;
+            $pizza->addPizzerium($this);
+        }
+
+        return $this;
+    }
+
+    public function removePizza(Pizza $pizza): self
+    {
+        if ($this->pizzas->contains($pizza)) {
+            $this->pizzas->removeElement($pizza);
+            $pizza->removePizzerium($this);
+        }
+
+        return $this;
     }
 }

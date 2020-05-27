@@ -2,16 +2,22 @@
 
 {% block title %}Liste des ingrédients{% endblock %}
 
-{% block titrePage %}Les ingrédients{% endblock %}
+{% block titrePage %}
+    Les ingrédients
+{% endblock %}
 
 {% block body %}
     <div class="tp-detail-page">
-    {% for ingredientPizza in pizza.IngredientsPizza() %}
-        <div class="tp-detail-title">
-            <a href="{{ path("app_pizza_detail", {"pizzaId": ingredient.id}) }}">
-                <i class="fa fa-caret-square-o-right tp-link" aria-hidden="true"></i>
-                <span>{{ ingredientPizza.ingredient.name }}</span>
-            </a>
-        </div>
-    {% endfor %}
+        {% for ingredientPizza in pizza.IngredientsPizza() %}
+            <div class="tp-detail-title">
+                <p>Prix de fabrication</p>
+            </div>
+            <span>{{ ingredientPizza.ingredient.cout }}</span>
+            <br/>
+            <div class="tp-detail-title">
+                <p>Ingrédients</p>
+            </div>
+            <span>{{ ingredientPizza.ingredient.name }}</span>
+            {% endfor %}
+    </div>
 {% endblock %}

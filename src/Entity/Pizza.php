@@ -34,9 +34,14 @@ class Pizza
     private $quantiteIngredients;
 
     /**
-     * @ORM\ManyToOne(targetEntity=IngredientPizza::class)
+     * @ORM\OneToMany(targetEntity=IngredientPizza::class, mappedBy="pizza")
      */
-    private $IngredientsPizza;
+    private $ingredientsPizza;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Pizzeria::class, inversedBy="pizzas")
+     */
+    private $pizzeria;
 
     /**
      * Constructor
@@ -44,6 +49,8 @@ class Pizza
     public function __construct()
     {
         $this->quantiteIngredients = new ArrayCollection();
+        $this->ingredientsPizza = new ArrayCollection();
+        $this->pizzeria = new ArrayCollection();
     }
 
     /**
@@ -111,14 +118,59 @@ class Pizza
         return $this->quantiteIngredients;
     }
 
-    public function getIngredientsPizza(): ?IngredientPizza
+    /**
+     * @return Collection|IngredientPizza[]
+     */
+    public function getIngredientsPizza(): Collection
     {
-        return $this->IngredientsPizza;
+        return $this->ingredientsPizza;
     }
 
-    public function setIngredientsPizza(?IngredientPizza $IngredientsPizza): self
+    public function addIngredientsPizza(IngredientPizza $ingredientsPizza): self
     {
-        $this->IngredientsPizza = $IngredientsPizza;
+        if (!$this->ingredientsPizza->contains($ingredientsPizza)) {
+            $this->ingredientsPizza[] = $ingredientsPizza;
+            $ingredientsPizza->setPizza($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIngredientsPizza(IngredientPizza $ingredientsPizza): self
+    {
+        if ($this->ingredientsPizza->contains($ingredientsPizza)) {
+            $this->ingredientsPizza->removeElement($ingredientsPizza);
+            // set the owning side to null (unless already changed)
+            if ($ingredientsPizza->getPizza() === $this) {
+                $ingredientsPizza->setPizza(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pizzeria[]
+     */
+    public function getPizzeria(): Collection
+    {
+        return $this->pizzeria;
+    }
+
+    public function addPizzerium(Pizzeria $pizzerium): self
+    {
+        if (!$this->pizzeria->contains($pizzerium)) {
+            $this->pizzeria[] = $pizzerium;
+        }
+
+        return $this;
+    }
+
+    public function removePizzerium(Pizzeria $pizzerium): self
+    {
+        if ($this->pizzeria->contains($pizzerium)) {
+            $this->pizzeria->removeElement($pizzerium);
+        }
 
         return $this;
     }
