@@ -1,9 +1,9 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Liste des ingrédients{% endblock %}
+{% block title %}Détail de la pizza{% endblock %}
 
 {% block titrePage %}
-    Les ingrédients
+    La pizza {% for pizzas in pizza%}<span>{{ pizza.nom }}</span>{% endfor %}
 {% endblock %}
 
 {% block body %}

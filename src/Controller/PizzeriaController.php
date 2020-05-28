@@ -41,8 +41,8 @@ class PizzeriaController extends AbstractController
      * )
      * @return Response
      */
-    public function detailAction($pizzeriaId): Response
+    public function detailAction(int $pizzeriaId, PizzeriaRepository $pizzeriaRepo): Response
     {
-        return new Response("Carte de la pizzéria {$pizzeriaId}");
+        return $this->render("Pizzeria/carte.html.twig", ['pizzeria' => $pizzeriaRepo->find($pizzeriaId)]);
     }
 }
